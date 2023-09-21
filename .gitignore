@@ -1,1 +1,8 @@
 hello
+main
+a.out
+*.a
+*.o
+build
+settings.json
+.cache

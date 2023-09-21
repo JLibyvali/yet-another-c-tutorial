@@ -1,0 +1,13 @@
+{
+  "cmake.configureArgs": [
+    // specify cmake args here
+  ],
+  // https://clangd.llvm.org
+  // https://clang.llvm.org/docs/ClangCommandLineReference.html
+  "clangd.arguments": [
+    "--compile-commands-dir=${workspaceFolder}/build",
+    "--background-index",
+    // might be useful for cross-compiling
+    // "--query-driver=/opt/arm-gnu-toolchain-12.3/bin/arm-none-eabi-*"
+  ]
+}

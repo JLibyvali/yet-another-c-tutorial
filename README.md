@@ -2,7 +2,7 @@
 
 ## Preaqusiites
 
-- A text editor (preferably vim, a plain [Notepad](https://en.wikipedia.org/wiki/Windows_Notepad) could also do it jobs)
+- A text editor (preferably vim, a plain [Notepad](https://en.wikipedia.org/wiki/Windows_Notepad) could also do its jobs)
 - Know what a shell is (cmd, bash, powershell, etc.)
 
 ### Don't
@@ -108,9 +108,10 @@ clang --version
 
 I don't explain the code. The point is how to build it.
 
-[hello.c](SimpleCommandline/HelloWorld/hello.c)
+[hello.c](src/HelloWorld/hello.c)
 
 ```bash
+cd SimpleCommandline/HelloWorld
 clang -o hello hello.c
 # or gcc
 gcc -o hello hello.c 
@@ -119,7 +120,7 @@ gcc -o hello hello.c
 
 Simple. `-o` means output to a file called `hello`. If you don't specify it, the output file will be `a.out`.
 
-[hello.cpp](SimpleCommandline/HelloWorld/hello.cpp)
+[hello.cpp](src/HelloWorld/hello.cpp)
 
 C++ would be the same. However, you will need `clang++` to link C++ standard library.
 
@@ -140,6 +141,7 @@ Undefined symbols for architecture arm64:
 "std::__1::locale::use_facet(std::__1::locale::id&) const", referenced from:
       std::__1::ctype<char> const& std::__1::use_facet[abi:v15006]<std::__1::ctype<char> >(std::__1::locale const&) in hello-8925e7.o
 <more error truncated>
+# linker complains it cannot find some symbols.
 ld: symbol(s) not found for architecture arm64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 ```
@@ -149,11 +151,14 @@ You could manually link the C++ standard library though
 ```bash
 # -lc++ means link libc++
 clang -o hello hello.cpp -lc++
+# gcc
+gcc -o hello hello.cpp -lstdc++
 ```
 
 What's `libc++` you may ask?
 
 ```bash
+# macOS
 $ otool -L hello 
 
 hello:
@@ -161,9 +166,21 @@ hello:
         /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1319.100.3)
 ```
 
-### Static Library
+```bash
+# linux
+$ ldd hello
 
-TODO
+        linux-vdso.so.1 (0x0000007f9d58c000)
+        libstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000007f9d2f0000)
+        libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000007f9d140000)
+        libm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000007f9d0a0000)
+        libgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000007f9d060000)
+        /lib/ld-linux-aarch64.so.1 (0x0000007f9d54f000)
+```
+
+### Library
+
+TODO: see [Library](src/Library)
 
 ## CMake
 
@@ -177,10 +194,21 @@ TODO: Include Path, Library Path, C flags, Target, etc.
 
 TODO: Use `clangd` as language server. ~~Or just use [Clion](https://www.jetbrains.com/clion/).~~
 
+See [settings.template.jsonc](src/Library/.vscode/settings.template.jsonc) for example.
+
+change `settings.template.jsonc` to `settings.json` and modify it to your needs.
+
+About Visual Studio Code settings, see "[User and Workspace Settings](https://code.visualstudio.com/docs/getstarted/settings)".
+
 ## Nix
 
 TODO: Package management made easy. Docker is also a good choice.
 
+TODO: OpenCV example.
+
 ## Embeded Stuff
 
 TODO: ldscript, gdb, convert Keil project to CMake, etc.
+
+TODO: a minimal example for Arduino Uno or STM32 Bluepill. Of course do it
+without stupid Arduino IDE or STM32CubeMX or PlatformIO.

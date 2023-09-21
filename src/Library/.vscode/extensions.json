@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "llvm-vs-code-extensions.vscode-clangd",
+    "ms-vscode.cmake-tools"
+  ],
+  "unwantedRecommendations": [
+    "platformio.platformio-ide",
+    "espressif.esp-idf-extension"
+  ]
+}
