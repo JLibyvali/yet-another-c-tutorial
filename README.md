@@ -204,6 +204,16 @@ $ ldd hello
 
 TODO: see [Library](src/Library)
 
+```bash
+# from clang help message
+ -c                      Only run preprocess, compile, and assemble steps
+
+clang -c -o hello.o hello.c
+clang -o hello hello.o --verbose
+# you will find it just calls ld
+# clang/gcc is just a compiler driver
+```
+
 ## CMake
 
 I will skip Makefile and go straight to [CMake](https://cmake.org). No one writes Makefile by hand
