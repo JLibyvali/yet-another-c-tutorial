@@ -57,7 +57,7 @@ I will only talk about clang and gcc. MSVC is not cross-platform and I don't use
 
 ### Windows
 
-Install [MSYS2](https://www.msys2.org/), a unix-like environment for Windows. It provides a package manager (`pacman``) to install the toolchain.
+Install [MSYS2](https://www.msys2.org/), a unix-like environment for Windows. It provides a package manager (`pacman`) to install the toolchain.
 
 [Different environment](https://www.msys2.org/docs/environments/). I choose `UCRT64`.
 
