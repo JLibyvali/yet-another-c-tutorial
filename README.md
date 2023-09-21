@@ -214,6 +214,8 @@ clang -o hello hello.o --verbose
 # clang/gcc is just a compiler driver
 ```
 
+- [What does the "rcs" option in ar do?](https://stackoverflow.com/questions/29714300/what-does-the-rcs-option-in-ar-do)
+
 ## CMake
 
 I will skip Makefile and go straight to [CMake](https://cmake.org). No one writes Makefile by hand
