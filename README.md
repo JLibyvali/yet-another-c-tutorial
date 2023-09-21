@@ -108,12 +108,7 @@ clang --version
 
 I don't explain the code. The point is how to build it.
 
-```c
-#include <stdio.h>
-int main(){
-  printf("Hello World!\n");
-}
-```
+[hello.c](SimpleCommandline/HelloWorld/hello.c)
 
 ```bash
 clang -o hello hello.c
@@ -123,6 +118,48 @@ gcc -o hello hello.c
 ```
 
 Simple. `-o` means output to a file called `hello`. If you don't specify it, the output file will be `a.out`.
+
+[hello.cpp](SimpleCommandline/HelloWorld/hello.cpp)
+
+C++ would be the same. However, you will need `clang++` to link C++ standard library.
+
+```bash
+clang++ -o hello hello.cpp
+# or gcc
+g++ -o hello hello.cpp
+./hello
+```
+
+Use `clang` to compile C++ code will result in error.
+
+```bash
+clang -o hello hello.cpp
+
+# output
+Undefined symbols for architecture arm64:
+"std::__1::locale::use_facet(std::__1::locale::id&) const", referenced from:
+      std::__1::ctype<char> const& std::__1::use_facet[abi:v15006]<std::__1::ctype<char> >(std::__1::locale const&) in hello-8925e7.o
+<more error truncated>
+ld: symbol(s) not found for architecture arm64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+```
+
+You could manually link the C++ standard library though
+
+```bash
+# -lc++ means link libc++
+clang -o hello hello.cpp -lc++
+```
+
+What's `libc++` you may ask?
+
+```bash
+$ otool -L hello 
+
+hello:
+        /usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 1500.65.0)
+        /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1319.100.3)
+```
 
 ### Static Library
 
