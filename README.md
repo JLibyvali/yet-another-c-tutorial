@@ -130,8 +130,8 @@ TODO
 
 ## CMake
 
-I will skip Makefile and go straight to CMake. No one writes Makefile by hand
-anymore. Other tools like meson, bazel, xmake, etc. are also good, but I'll just
+I will skip Makefile and go straight to [CMake](https://cmake.org). No one writes Makefile by hand
+anymore. Other tools like [meson](https://mesonbuild.com), [bazel](https://bazel.build), [xmake](https://xmake.io), etc. are also good, but I'll just
 use CMake.
 
 TODO: Include Path, Library Path, C flags, Target, etc.
