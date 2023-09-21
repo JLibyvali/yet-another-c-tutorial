@@ -57,7 +57,7 @@ I will only talk about clang and gcc. MSVC is not cross-platform and I don't use
 
 ### Windows
 
-Install [MSYS2](https://www.msys2.org/), a unix-like environment for Windows. It provides a package manager (pacman) to install the toolchain.
+Install [MSYS2](https://www.msys2.org/), a unix-like environment for Windows. It provides a package manager (`pacman``) to install the toolchain.
 
 [Different environment](https://www.msys2.org/docs/environments/). I choose `UCRT64`.
 
@@ -67,7 +67,7 @@ pacman -S mingw-w64-clang
 clang --version
 ```
 
-Or just use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (Windows Subsystem for Linux) and install clang on it.
+Or just use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (Windows Subsystem for Linux) and install `clang` on it.
 
 #### Notes
 
@@ -100,6 +100,28 @@ XCode comes with clang.
 ```bash
 xcode-select --install 
 clang --version
+```
+
+Or better, install [Homebrew](https://brew.sh) and install `clang` with it.
+
+```bash
+# assuming you have Homebrew installed
+brew install llvm
+
+# llvm is keg-only, which means it was not symlinked into /opt/homebrew,
+# because macOS already provides this software and installing another version in
+# parallel can cause all kinds of trouble.
+
+# If you need to have llvm first in your PATH, run:
+#   echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> ~/.zshrc
+
+echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> ~/.zshrc
+. ~/.zshrc
+
+# PATH has been changed, check if clang is the one we installed
+
+$ which clang
+/opt/homebrew/opt/llvm/bin/clang
 ```
 
 ## Simple Commandline
