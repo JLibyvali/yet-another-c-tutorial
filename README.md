@@ -132,60 +132,50 @@ Note the target here. `x86_64-pc-windows-msvc` and `x86_64-w64-windows-gnu`
 NOT binary compatible (?). You might need to recompile your dependencies if you
 switch between them. 
 
-```bash
+```powershell
+# use https://github.com/lucasg/Dependencies to check dependencies
 # x86_64-w64-windows-gnu
-ldd /ucrt64/bin/clang
-        ntdll.dll => /c/WINDOWS/SYSTEM32/ntdll.dll (0x7fffa6e70000)
-        KERNEL32.DLL => /c/WINDOWS/System32/KERNEL32.DLL (0x7fffa6020000)
-        KERNELBASE.dll => /c/WINDOWS/System32/KERNELBASE.dll (0x7fffa43d0000)
-        apphelp.dll => /c/WINDOWS/SYSTEM32/apphelp.dll (0x7fffa12c0000)
-        ucrtbase.dll => /c/WINDOWS/System32/ucrtbase.dll (0x7fffa4780000)
-        libstdc++-6.dll => /ucrt64/bin/libstdc++-6.dll (0x7ffef6e50000)
-        libgcc_s_seh-1.dll => /ucrt64/bin/libgcc_s_seh-1.dll (0x7fff929f0000)
-        libwinpthread-1.dll => /ucrt64/bin/libwinpthread-1.dll (0x7fff92c20000)
-        libwinpthread-1.dll => /ucrt64/bin/libwinpthread-1.dll (0x1ac9a730000)
-        libclang-cpp.dll => /ucrt64/bin/libclang-cpp.dll (0x7ffef3ab0000)
-        VERSION.dll => /c/WINDOWS/SYSTEM32/VERSION.dll (0x7fff99e30000)
-        msvcrt.dll => /c/WINDOWS/System32/msvcrt.dll (0x7fffa6370000)
-        libLLVM-16.dll => /ucrt64/bin/libLLVM-16.dll (0x7ffee9cf0000)
-        libLLVM-16.dll => /ucrt64/bin/libLLVM-16.dll (0x1ac9a8b0000)
-        ADVAPI32.dll => /c/WINDOWS/System32/ADVAPI32.dll (0x7fffa58a0000)
-        sechost.dll => /c/WINDOWS/System32/sechost.dll (0x7fffa5730000)
-        RPCRT4.dll => /c/WINDOWS/System32/RPCRT4.dll (0x7fffa5610000)
-        ole32.dll => /c/WINDOWS/System32/ole32.dll (0x7fffa60f0000)
-        msvcp_win.dll => /c/WINDOWS/System32/msvcp_win.dll (0x7fffa4330000)
-        GDI32.dll => /c/WINDOWS/System32/GDI32.dll (0x7fffa5870000)
-        win32u.dll => /c/WINDOWS/System32/win32u.dll (0x7fffa4ba0000)
-        gdi32full.dll => /c/WINDOWS/System32/gdi32full.dll (0x7fffa48a0000)
-        USER32.dll => /c/WINDOWS/System32/USER32.dll (0x7fffa6580000)
-        combase.dll => /c/WINDOWS/System32/combase.dll (0x7fffa5b10000)
-        SHELL32.dll => /c/WINDOWS/System32/SHELL32.dll (0x7fffa4e10000)
-        libffi-8.dll => /ucrt64/bin/libffi-8.dll (0x7fff928c0000)
-        zlib1.dll => /ucrt64/bin/zlib1.dll (0x7fff928a0000)
-        libzstd.dll => /ucrt64/bin/libzstd.dll (0x7fff87bd0000)
-        libxml2-2.dll => /ucrt64/bin/libxml2-2.dll (0x7fff71940000)
-        WS2_32.dll => /c/WINDOWS/System32/WS2_32.dll (0x7fffa57e0000)
-        liblzma-5.dll => /ucrt64/bin/liblzma-5.dll (0x7fff92640000)
-        libiconv-2.dll => /ucrt64/bin/libiconv-2.dll (0x7fff71ba0000)
+PS > Dependencies -depth 1 -modules "C:\msys64\ucrt64\bin\clang.exe"
+[ROOT] clang.exe : C:\msys64\ucrt64\bin\clang.exe
+[ApiSetSchema] api-ms-win-crt-environment-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-heap-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-math-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-private-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-runtime-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-stdio-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-string-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-time-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[WellKnownDlls] KERNEL32.dll : C:\WINDOWS\system32\kernel32.dll
+[ApplicationDirectory] libstdc++-6.dll : C:\msys64\ucrt64\bin\libstdc++-6.dll
+[ApplicationDirectory] libclang-cpp.dll : C:\msys64\ucrt64\bin\libclang-cpp.dll
+[ApplicationDirectory] libLLVM-16.dll : C:\msys64\ucrt64\bin\libLLVM-16.dll
 
 # x86_64-pc-windows-msvc
-ldd "C:\Program Files\LLVM\bin\clang.exe"
-        ntdll.dll => /c/WINDOWS/SYSTEM32/ntdll.dll (0x7fffa6e70000)
-        KERNEL32.DLL => /c/WINDOWS/System32/KERNEL32.DLL (0x7fffa6020000)
-        KERNELBASE.dll => /c/WINDOWS/System32/KERNELBASE.dll (0x7fffa43d0000)
-        ADVAPI32.dll => /c/WINDOWS/System32/ADVAPI32.dll (0x7fffa58a0000)
-        msvcrt.dll => /c/WINDOWS/System32/msvcrt.dll (0x7fffa6370000)
-        sechost.dll => /c/WINDOWS/System32/sechost.dll (0x7fffa5730000)
-        MSVCP140.dll => /c/Program Files/LLVM/bin/MSVCP140.dll (0x7fff87c60000)
-        RPCRT4.dll => /c/WINDOWS/System32/RPCRT4.dll (0x7fffa5610000)
-        ucrtbase.dll => /c/WINDOWS/System32/ucrtbase.dll (0x7fffa4780000)
-        OLEAUT32.dll => /c/WINDOWS/System32/OLEAUT32.dll (0x7fffa6290000)
-        msvcp_win.dll => /c/WINDOWS/System32/msvcp_win.dll (0x7fffa4330000)
-        VCRUNTIME140.dll => /c/Program Files/LLVM/bin/VCRUNTIME140.dll (0x7fff92830000)
-        combase.dll => /c/WINDOWS/System32/combase.dll (0x7fffa5b10000)
-        VCRUNTIME140_1.dll => /c/Program Files/LLVM/bin/VCRUNTIME140_1.dll (0x7fff92c30000)
-        VERSION.dll => /c/WINDOWS/SYSTEM32/VERSION.dll (0x7fff99e30000)
+PS > Dependencies -depth 1 -modules "C:\Program Files\LLVM\bin\clang.exe"
+[ROOT] clang.exe : C:\Program Files\LLVM\bin\clang.exe
+[ApiSetSchema] api-ms-win-crt-stdio-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-runtime-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-math-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-time-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-heap-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-filesystem-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-string-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-convert-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-environment-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-utility-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[ApiSetSchema] api-ms-win-crt-locale-l1-1-0.dll : C:\WINDOWS\system32\ucrtbase.dll
+[WellKnownDlls] KERNEL32.dll : C:\WINDOWS\system32\kernel32.dll
+[WellKnownDlls] ADVAPI32.dll : C:\WINDOWS\system32\advapi32.dll
+[WellKnownDlls] OLEAUT32.dll : C:\WINDOWS\system32\OLEAUT32.dll
+[WellKnownDlls] SHELL32.dll : C:\WINDOWS\system32\SHELL32.dll
+[WellKnownDlls] ole32.dll : C:\WINDOWS\system32\ole32.dll
+[ApplicationDirectory] MSVCP140.dll : C:\Program Files\LLVM\bin\MSVCP140.dll
+[ApplicationDirectory] VCRUNTIME140.dll : C:\Program Files\LLVM\bin\VCRUNTIME140.dll
+[ApplicationDirectory] VCRUNTIME140_1.dll : C:\Program Files\LLVM\bin\VCRUNTIME140_1.dll
+[WindowsFolder] VERSION.dll : C:\WINDOWS\system32\VERSION.dll
 ```
+
+The obvious difference is `libstdc++-6.dll` and `MSVCP140.dll`. The latter is from MSVC. 
 
 ##### Difference between environments
 
@@ -204,6 +194,8 @@ Because the rest is the same as [Linux](#linux), I won't talk about it here.
 - You could search your MSYS2 packages [here](https://packages.msys2.org/queue).
 - [what is the difference between x86_64-pc-windows-msvc and x86_64-pc-windows-gnu targets in clang](https://stackoverflow.com/questions/73184707/what-is-the-difference-between-x86-64-pc-windows-msvc-and-x86-64-pc-windows-gnu)
 - [What's the difference between windows-gnu and windows-msvc release?](https://github.com/sharkdp/fd/issues/726)
+- [C/C++标准库](https://zhuanlan.zhihu.com/p/566419668)
+- [Understanding the different flavors of Clang C and C++ compilers in Windows](https://blog.conan.io/2022/10/13/Different-flavors-Clang-compiler-Windows.html)
 
 ### Linux
 
