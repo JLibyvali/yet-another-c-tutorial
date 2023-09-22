@@ -92,7 +92,7 @@ Install [MSYS2](https://www.msys2.org/), a unix-like environment for Windows. It
 
 MSYS2 comes with [different environment](https://www.msys2.org/docs/environments/). Choose your favorite one. I'll recommend `uart64` but `mingw64` seems has better compatibility.
 
-Launch the terminal corresponding to your environment. (e.g. `MSYS2 MinGW UCRT x64`). If it's slow when updating the package database, try to apply [one of the Chinese mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/), or set [HTTP_PROXY] and [HTTPS_PROXY] environment variable if you're behind a proxy.
+Launch the terminal corresponding to your environment. (e.g. `MSYS2 MinGW UCRT x64`). If it's slow when updating the package database, try to apply [one of the Chinese mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/), or set `HTTP_PROXY` and `HTTPS_PROXY` environment variable if you're behind a proxy.
 
 ```bash
 pacman -Syu # update the package database and upgrade some package
@@ -131,6 +131,61 @@ Note the target here. `x86_64-pc-windows-msvc` and `x86_64-w64-windows-gnu`
 (i.e. `x86_64-w64-mingw32` which is [MinGW-w64](https://www.mingw-w64.org/)) are
 NOT binary compatible (?). You might need to recompile your dependencies if you
 switch between them. 
+
+```bash
+# x86_64-w64-windows-gnu
+ldd /ucrt64/bin/clang
+        ntdll.dll => /c/WINDOWS/SYSTEM32/ntdll.dll (0x7fffa6e70000)
+        KERNEL32.DLL => /c/WINDOWS/System32/KERNEL32.DLL (0x7fffa6020000)
+        KERNELBASE.dll => /c/WINDOWS/System32/KERNELBASE.dll (0x7fffa43d0000)
+        apphelp.dll => /c/WINDOWS/SYSTEM32/apphelp.dll (0x7fffa12c0000)
+        ucrtbase.dll => /c/WINDOWS/System32/ucrtbase.dll (0x7fffa4780000)
+        libstdc++-6.dll => /ucrt64/bin/libstdc++-6.dll (0x7ffef6e50000)
+        libgcc_s_seh-1.dll => /ucrt64/bin/libgcc_s_seh-1.dll (0x7fff929f0000)
+        libwinpthread-1.dll => /ucrt64/bin/libwinpthread-1.dll (0x7fff92c20000)
+        libwinpthread-1.dll => /ucrt64/bin/libwinpthread-1.dll (0x1ac9a730000)
+        libclang-cpp.dll => /ucrt64/bin/libclang-cpp.dll (0x7ffef3ab0000)
+        VERSION.dll => /c/WINDOWS/SYSTEM32/VERSION.dll (0x7fff99e30000)
+        msvcrt.dll => /c/WINDOWS/System32/msvcrt.dll (0x7fffa6370000)
+        libLLVM-16.dll => /ucrt64/bin/libLLVM-16.dll (0x7ffee9cf0000)
+        libLLVM-16.dll => /ucrt64/bin/libLLVM-16.dll (0x1ac9a8b0000)
+        ADVAPI32.dll => /c/WINDOWS/System32/ADVAPI32.dll (0x7fffa58a0000)
+        sechost.dll => /c/WINDOWS/System32/sechost.dll (0x7fffa5730000)
+        RPCRT4.dll => /c/WINDOWS/System32/RPCRT4.dll (0x7fffa5610000)
+        ole32.dll => /c/WINDOWS/System32/ole32.dll (0x7fffa60f0000)
+        msvcp_win.dll => /c/WINDOWS/System32/msvcp_win.dll (0x7fffa4330000)
+        GDI32.dll => /c/WINDOWS/System32/GDI32.dll (0x7fffa5870000)
+        win32u.dll => /c/WINDOWS/System32/win32u.dll (0x7fffa4ba0000)
+        gdi32full.dll => /c/WINDOWS/System32/gdi32full.dll (0x7fffa48a0000)
+        USER32.dll => /c/WINDOWS/System32/USER32.dll (0x7fffa6580000)
+        combase.dll => /c/WINDOWS/System32/combase.dll (0x7fffa5b10000)
+        SHELL32.dll => /c/WINDOWS/System32/SHELL32.dll (0x7fffa4e10000)
+        libffi-8.dll => /ucrt64/bin/libffi-8.dll (0x7fff928c0000)
+        zlib1.dll => /ucrt64/bin/zlib1.dll (0x7fff928a0000)
+        libzstd.dll => /ucrt64/bin/libzstd.dll (0x7fff87bd0000)
+        libxml2-2.dll => /ucrt64/bin/libxml2-2.dll (0x7fff71940000)
+        WS2_32.dll => /c/WINDOWS/System32/WS2_32.dll (0x7fffa57e0000)
+        liblzma-5.dll => /ucrt64/bin/liblzma-5.dll (0x7fff92640000)
+        libiconv-2.dll => /ucrt64/bin/libiconv-2.dll (0x7fff71ba0000)
+
+# x86_64-pc-windows-msvc
+ldd "C:\Program Files\LLVM\bin\clang.exe"
+        ntdll.dll => /c/WINDOWS/SYSTEM32/ntdll.dll (0x7fffa6e70000)
+        KERNEL32.DLL => /c/WINDOWS/System32/KERNEL32.DLL (0x7fffa6020000)
+        KERNELBASE.dll => /c/WINDOWS/System32/KERNELBASE.dll (0x7fffa43d0000)
+        ADVAPI32.dll => /c/WINDOWS/System32/ADVAPI32.dll (0x7fffa58a0000)
+        msvcrt.dll => /c/WINDOWS/System32/msvcrt.dll (0x7fffa6370000)
+        sechost.dll => /c/WINDOWS/System32/sechost.dll (0x7fffa5730000)
+        MSVCP140.dll => /c/Program Files/LLVM/bin/MSVCP140.dll (0x7fff87c60000)
+        RPCRT4.dll => /c/WINDOWS/System32/RPCRT4.dll (0x7fffa5610000)
+        ucrtbase.dll => /c/WINDOWS/System32/ucrtbase.dll (0x7fffa4780000)
+        OLEAUT32.dll => /c/WINDOWS/System32/OLEAUT32.dll (0x7fffa6290000)
+        msvcp_win.dll => /c/WINDOWS/System32/msvcp_win.dll (0x7fffa4330000)
+        VCRUNTIME140.dll => /c/Program Files/LLVM/bin/VCRUNTIME140.dll (0x7fff92830000)
+        combase.dll => /c/WINDOWS/System32/combase.dll (0x7fffa5b10000)
+        VCRUNTIME140_1.dll => /c/Program Files/LLVM/bin/VCRUNTIME140_1.dll (0x7fff92c30000)
+        VERSION.dll => /c/WINDOWS/SYSTEM32/VERSION.dll (0x7fff99e30000)
+```
 
 ##### Difference between environments
 
