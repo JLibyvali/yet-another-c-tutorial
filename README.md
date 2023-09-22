@@ -129,7 +129,7 @@ gcc version 13.2.0 (Rev2, Built by MSYS2 project)
 
 Note the target here. `x86_64-pc-windows-msvc` and `x86_64-w64-windows-gnu`
 (i.e. `x86_64-w64-mingw32` which is [MinGW-w64](https://www.mingw-w64.org/)) are
-NOT binary compatible. You might need to recompile your dependencies if you
+NOT binary compatible (?). You might need to recompile your dependencies if you
 switch between them. 
 
 ##### Difference between environments
@@ -148,6 +148,7 @@ Because the rest is the same as [Linux](#linux), I won't talk about it here.
 - Like fancy terminal? See [Terminals](https://www.msys2.org/docs/terminals/). I recommend [Windows Terminal](https://github.com/microsoft/terminal).
 - You could search your MSYS2 packages [here](https://packages.msys2.org/queue).
 - [what is the difference between x86_64-pc-windows-msvc and x86_64-pc-windows-gnu targets in clang](https://stackoverflow.com/questions/73184707/what-is-the-difference-between-x86-64-pc-windows-msvc-and-x86-64-pc-windows-gnu)
+- [What's the difference between windows-gnu and windows-msvc release?](https://github.com/sharkdp/fd/issues/726)
 
 ### Linux
 
