@@ -345,7 +345,9 @@ clang -o hello hello.o --verbose
 
 ### [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/)
 
-TODO: A example of using a third-party library like [libcurl](https://curl.se/libcurl/).
+UNIX exclusive tool. Skip it if you're using Windows.
+
+TODO: A example of using a third-party library like [libcurl](https://curl.se/libcurl/). (What about Windows?)
 
 ## CMake
 
@@ -364,6 +366,10 @@ See [settings.template.jsonc](src/Library/.vscode/settings.template.jsonc) for e
 change `settings.template.jsonc` to `settings.json` and modify it to your needs.
 
 About Visual Studio Code settings, see "[User and Workspace Settings](https://code.visualstudio.com/docs/getstarted/settings)".
+
+## `vckpg`
+
+[vckpg](https://vcpkg.io/en/) is more useful in Windows. In Linux we have our system package manager.
 
 ## Nix
 
