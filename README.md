@@ -127,10 +127,18 @@ Supported LTO compression algorithms: zlib zstd
 gcc version 13.2.0 (Rev2, Built by MSYS2 project)
 ```
 
-Note the target here. `x86_64-pc-windows-msvc` and `x86_64-w64-windows-gnu`
-(i.e. `x86_64-w64-mingw32` which is [MinGW-w64](https://www.mingw-w64.org/)) are
-NOT binary compatible (?). You might need to recompile your dependencies if you
-switch between them. 
+##### Difference between environments and targets
+
+The section is for nerd. Feel free to skip it.
+
+- Different C++ standard library. `mingw64` uses `libstdc++` while `clang64` uses `libc++`. 
+- Different C Runtime Library. `mingw64` uses `msvcrt` while `clang64` an `uart64` uses `ucrt`.
+
+Note the target we mentioned above. The compilers installed with two different
+methods are actually different targets.  `x86_64-pc-windows-msvc` and
+`x86_64-w64-windows-gnu` (i.e. `x86_64-w64-mingw32` which is
+[MinGW-w64](https://www.mingw-w64.org/)) are NOT binary compatible (?). You
+might need to recompile your dependencies if you switch between them. 
 
 ```powershell
 # use https://github.com/lucasg/Dependencies to check dependencies
@@ -176,11 +184,6 @@ PS > Dependencies -depth 1 -modules "C:\Program Files\LLVM\bin\clang.exe"
 ```
 
 The obvious difference is `libstdc++-6.dll` and `MSVCP140.dll`. The latter is from MSVC. 
-
-##### Difference between environments
-
-- Different C++ standard library. `mingw64` uses `libstdc++` while `clang64` uses `libc++`. 
-- Different C Runtime Library. `mingw64` uses `msvcrt` while `clang64` an `uart64` uses `ucrt`.
 
 #### [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) or [Docker](https://www.docker.com/)
 
