@@ -15,7 +15,7 @@
 
 Avoid other thing you call an IDE for now.
 
-Don't use [Visual Studio](https://code.visualstudio.com/) Code with fancy extensions until you know what you're doing. You could still use it as a text editor.
+Don't use [Visual Studio Code](https://code.visualstudio.com/) with fancy extensions until you know what you're doing. You could still use it as a text editor.
 
 We won't get into any embedded stuff (yet!). 
 For now just focus on desktop/commandline application.
