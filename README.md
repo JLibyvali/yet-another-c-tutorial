@@ -108,6 +108,30 @@ Thread model: posix
 InstalledDir: C:/msys64/ucrt64/bin
 ```
 
+If you want to use `gcc`.
+
+```bash
+# https://packages.msys2.org/base/mingw-w64-gcc
+pacman -S mingw-w64-ucrt-x86_64-gcc
+```
+
+```bash
+$ gcc -v
+Using built-in specs.
+COLLECT_GCC=C:\msys64\ucrt64\bin\gcc.exe
+COLLECT_LTO_WRAPPER=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/13.2.0/lto-wrapper.exe
+Target: x86_64-w64-mingw32
+Configured with: ../gcc-13.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev2, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --disable-libstdcxx-debug --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++
+Thread model: posix
+Supported LTO compression algorithms: zlib zstd
+gcc version 13.2.0 (Rev2, Built by MSYS2 project)
+```
+
+Note the target here. `x86_64-pc-windows-msvc` and `x86_64-w64-windows-gnu`
+(i.e. `x86_64-w64-mingw32` which is [MinGW-w64](https://www.mingw-w64.org/)) are
+NOT binary compatible. You might need to recompile your dependencies if you
+switch between them.
+
 ##### Difference between environments
 
 - Different C++ standard library. `mingw64` uses `libstdc++` while `clang64` uses `libc++`. 
