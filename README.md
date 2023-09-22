@@ -7,19 +7,20 @@
 
 ### Don't
 
-- DevC++ (just a wrapper over gcc)
-- CodeBlocks (same as above)
-- Visual Studio (too complicated, GUI stuff, no good)
-- Keil (don't use proprietary outdated stuff)
-- Microsoft Visual C++ 6.0 (what...?)
+- [DevC++](https://www.bloodshed.net/) (just a wrapper over gcc)
+- [CodeBlocks](https://www.codeblocks.org/) (same as above)
+- [Visual Studio](https://visualstudio.microsoft.com/) (too complicated, `sln` is mandatory)
+- [Keil](https://www.keil.com/) (proprietary outdated stuff and we don't do embedded stuff here yet)
+- [Microsoft Visual C++ 6.0](https://news.microsoft.com/1998/06/29/microsoft-introduces-visual-c-6-0/) (what...? It's from 1998!)
 
 Avoid other thing you call an IDE for now.
 
-Don't use Visual Studio Code until you know what you're doing, we'll get to that later.
+Don't use [Visual Studio](https://code.visualstudio.com/) Code with fancy extensions until you know what you're doing. You could still use it as a text editor.
+
+We won't get into any embedded stuff (yet!). 
+For now just focus on desktop/commandline application.
 
 ### Preprocessing, Compiling, Linking
-
-We won't get into any embeded stuff. Just focus on desktop/commandline application.
 
 As you learned in your traditional C/C++ course
 
@@ -57,23 +58,71 @@ I will only talk about clang and gcc. MSVC is not cross-platform and I don't use
 
 ### Windows
 
-Install [MSYS2](https://www.msys2.org/), a unix-like environment for Windows. It provides a package manager (`pacman`) to install the toolchain.
+You have several choices. Native [LLVM](https://llvm.org/) or [MinGW](https://www.mingw-w64.org/). Choose latter if you need to use [`gcc`](https://gcc.gnu.org/). I will introduce both.
 
-[Different environment](https://www.msys2.org/docs/environments/). I choose `UCRT64`.
+#### [LLVM](https://llvm.org/)
 
-```bash
-pacman -Syu
-pacman -S mingw-w64-clang
-clang --version
+Find [LLVM release in GitHub](https://github.com/llvm/llvm-project/releases). Find Windows
+installer called `LLVM-<version>.win64.exe`. (like [`LLVM-17.0.1-win64.exe`](https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.1/LLVM-17.0.1-win64.exe))
+I assume you install it to `C:\Program Files\LLVM` so `clang` should be `C:\Program Files\LLVM\bin\clang.exe`.
+
+To know where your `clang` is, use [`get-command`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-command) in PowerShell.
+
+```powershell
+PS > get-command clang | select source
+
+Source
+------
+C:\Program Files\LLVM\bin\clang.exe
+
+PS > clang -v
+clang version 17.0.1
+Target: x86_64-pc-windows-msvc
+Thread model: posix
+InstalledDir: C:\Program Files\LLVM\bin
 ```
 
-Or just use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (Windows Subsystem for Linux) and install `clang` on it.
+You're good to go.
+
+Note: Of course there're other ways to get yourself a LLVM environment. As described in [Building Zig on Windows](https://github.com/ziglang/zig/wiki/Building-Zig-on-Windows).
+
+#### MSYS2
+
+Install [MSYS2](https://www.msys2.org/), a unix-like environment for Windows. It provides a package manager (`pacman`) to install the toolchain.
+
+MSYS2 comes with [different environment](https://www.msys2.org/docs/environments/). Choose your favorite one. I'll recommend `uart64` but `mingw64` seems has better compatibility.
+
+Launch the terminal corresponding to your environment. (e.g. `MSYS2 MinGW UCRT x64`). If it's slow when updating the package database, try to apply [one of the Chinese mirror](https://mirrors.tuna.tsinghua.edu.cn/help/msys2/), or set [HTTP_PROXY] and [HTTPS_PROXY] environment variable if you're behind a proxy.
+
+```bash
+pacman -Syu # update the package database and upgrade some package
+# see https://packages.msys2.org/base/mingw-w64-clang
+pacman -S mingw-w64-ucrt-x86_64-clang
+```
+
+```bash
+$ clang -v
+clang version 16.0.5
+Target: x86_64-w64-windows-gnu
+Thread model: posix
+InstalledDir: C:/msys64/ucrt64/bin
+```
+
+##### Difference between environments
+
+- Different C++ standard library. `mingw64` uses `libstdc++` while `clang64` uses `libc++`. 
+- Different C Runtime Library. `mingw64` uses `msvcrt` while `clang64` an `uart64` uses `ucrt`.
+
+#### [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) or [Docker](https://www.docker.com/)
+
+You could use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (Windows Subsystem for Linux) to get full Linux experience. 
+Because the rest is the same as [Linux](#linux), I won't talk about it here.
 
 #### Notes
 
 - [Using Clang on Windows for C++](https://wetmelon.github.io/clang-on-windows.html)
 - Like fancy terminal? See [Terminals](https://www.msys2.org/docs/terminals/). I recommend [Windows Terminal](https://github.com/microsoft/terminal).
-- You could search your packages [here](https://packages.msys2.org/queue).
+- You could search your MSYS2 packages [here](https://packages.msys2.org/queue).
 
 ### Linux
 
@@ -125,6 +174,8 @@ $ which clang
 ```
 
 ## Simple Commandline
+
+Simple stuff that doesn't need a build system. 
 
 ### Hello World
 
@@ -202,7 +253,7 @@ $ ldd hello
 
 ### Library
 
-TODO: see [Library](src/Library)
+TODO: see [Library](src/Library). A example of writing a library and use it.
 
 ```bash
 # from clang help message
@@ -215,6 +266,10 @@ clang -o hello hello.o --verbose
 ```
 
 - [What does the "rcs" option in ar do?](https://stackoverflow.com/questions/29714300/what-does-the-rcs-option-in-ar-do)
+
+### [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/)
+
+TODO: A example of using a third-party library like [libcurl](https://curl.se/libcurl/).
 
 ## CMake
 
@@ -246,3 +301,5 @@ TODO: ldscript, gdb, convert Keil project to CMake, etc.
 
 TODO: a minimal example for Arduino Uno or STM32 Bluepill. Of course do it
 without stupid Arduino IDE or STM32CubeMX or PlatformIO.
+
+Note: I didn't realize [Keil MDK v6 Community Edition](https://www.keil.arm.com/) and a new build system called [cSolution](https://github.com/ARM-software/vscode-cmsis-csolution) have been released for a while.
