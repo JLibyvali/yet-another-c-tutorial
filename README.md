@@ -444,7 +444,7 @@ See [settings.template.jsonc](src/Library/.vscode/settings.template.jsonc) for e
 
 change `settings.template.jsonc` to `settings.json` and modify it to your needs.
 
-About Visual Studio Code settings, see "[User and Workspace Settings](https://code.visualstudio.com/docs/getstarted/settings)".
+About Visual Studio Code settings, see [*User and Workspace Settings*](https://code.visualstudio.com/docs/getstarted/settings).
 
 
 ## Embeded Stuff
