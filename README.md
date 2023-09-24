@@ -231,12 +231,32 @@ Because the rest is the same as [Linux](#linux), I won't talk about it here.
 
 ### Linux
 
+#### RHEL/CentOS/Fedora
+
+[`yum`](https://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified) should be deprecated. Use [`dnf`](https://en.wikipedia.org/wiki/DNF_(software)) instead.
+
+```bash
+sudo dnf install clang
+```
+
+Common development tools
+
+```bash
+sudo dnf groupinstall "Development Tools"
+```
+
 #### Debian/Ubuntu
 
 ```bash
 sudo apt update
 sudo apt install clang
 clang --version
+```
+
+Common development tools
+
+```bash
+sudo apt build-essential
 ```
 
 #### Arch 
@@ -247,9 +267,15 @@ sudo pacman -S clang
 clang --version
 ```
 
+Common development tools
+
+```bash
+sudo pacman -S base-devel
+```
+
 ### macOS
 
-XCode comes with clang. 
+Xcode comes with llvm but you could install only Xcode Command Line Tools with following command.
 
 ```bash
 xcode-select --install 
@@ -277,6 +303,8 @@ echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> ~/.zshrc
 $ which clang
 /opt/homebrew/opt/llvm/bin/clang
 ```
+
+- [深入淺出 Xcode Command Lines Tool(1) - 初探](https://jamesdouble.github.io/blog/2019/12/19/xcCmdLine-1/)
 
 ## Simple Commandline
 
@@ -372,11 +400,33 @@ clang -o hello hello.o --verbose
 
 - [What does the "rcs" option in ar do?](https://stackoverflow.com/questions/29714300/what-does-the-rcs-option-in-ar-do)
 
-### [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/)
+### Third-party Library
+
+#### [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/)
 
 UNIX exclusive tool. Skip it if you're using Windows.
 
-TODO: A example of using a third-party library like [libcurl](https://curl.se/libcurl/). (What about Windows?)
+System libraries. [pkgs.org](https://pkgs.org/) to search for packages.
+
+- [apt](https://en.wikipedia.org/wiki/APT_(software)) based (Debian, Ubuntu) convention: `lib<name>-dev` for development files, `lib<name>` for runtime files. 
+- [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager) based (CentOS, Fedora) convention: `lib<name>-devel` for development files, `lib<name>` for runtime files. 
+- [pacman](https://wiki.archlinux.org/title/Pacman) based (archlinux, Manjaro) convention: `lib<name>` for both development and runtime files.
+- [Homebrew](https://brew.sh/) based convention: `lib<name>` for both development and runtime files.
+
+TODO: A example of using a third-party library like [libcurl](https://curl.se/libcurl/).
+
+#### `vckpg`
+
+[vckpg](https://vcpkg.io/en/) is more useful in Windows. In Linux we have our system package manager.
+
+#### [`nix`](https://nixos.org/)
+
+Nix is special since it could run on any distro without messing up your system packages. It's a package manager and a build system.
+
+TODO: Package management made easy. Docker is also a good choice.
+
+TODO: OpenCV example.
+
 
 ## CMake
 
@@ -396,15 +446,6 @@ change `settings.template.jsonc` to `settings.json` and modify it to your needs.
 
 About Visual Studio Code settings, see "[User and Workspace Settings](https://code.visualstudio.com/docs/getstarted/settings)".
 
-## `vckpg`
-
-[vckpg](https://vcpkg.io/en/) is more useful in Windows. In Linux we have our system package manager.
-
-## Nix
-
-TODO: Package management made easy. Docker is also a good choice.
-
-TODO: OpenCV example.
 
 ## Embeded Stuff
 
