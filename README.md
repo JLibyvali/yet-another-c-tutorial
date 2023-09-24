@@ -69,7 +69,7 @@ Choose latter if you need to use [`gcc`](https://gcc.gnu.org/). I will introduce
 
 ##### Install Visual Studio Build Tools
 
-First you have to install [Build Tools for VisualStudio](https://visualstudio.microsoft.com/downloads/?q=build+tools) (in the
+First you have to install [Build Tools for Visual Studio](https://visualstudio.microsoft.com/downloads/?q=build+tools) (in the
 *Tools for Visual Studio* section instead of *Visual Studio*). Don't confuse it
 with Visual Studio IDE, though installing the latter will also install the
 former.
