@@ -58,11 +58,31 @@ I will only talk about clang and gcc. MSVC is not cross-platform and I don't use
 
 ### Windows
 
-You have several choices. Native [LLVM](https://llvm.org/) or [MinGW](https://www.mingw-w64.org/). Choose latter if you need to use [`gcc`](https://gcc.gnu.org/). I will introduce both.
+You have several choices. Native [LLVM](https://llvm.org/) or
+[MinGW](https://www.mingw-w64.org/). Note that they are different targets so not
+binary compatible (`x86_64-pc-windows-msvc` and `x86_64-w64-windows-gnu`) and
+you might have problem when linking libraries compiled with different targets.
+
+Choose latter if you need to use [`gcc`](https://gcc.gnu.org/). I will introduce both.
 
 #### [LLVM](https://llvm.org/)
 
-Find [LLVM release in GitHub](https://github.com/llvm/llvm-project/releases). Find Windows
+##### Install Visual Studio Build Tools
+
+First you have to install [Build Tools for VisualStudio](https://visualstudio.microsoft.com/downloads/?q=build+tools) (in the
+*Tools for Visual Studio* section instead of *Visual Studio*). Don't confuse it
+with Visual Studio IDE, though installing the latter will also install the
+former.
+
+Once you have install the *Visual Studio Installer*, select *Desktop development
+with C++* (which has `MSVC`, `Clang`, `CMake` and `MSBuild` in its description)
+and install it. (Remember you don't have to install the whole Visual Studio IDE)
+
+See [Install C and C++ support in Visual Studio](https://learn.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=msvc-170) for more details.
+
+##### Install LLVM
+
+If you don't select *C++ Clang Compiler for Windows* (in fact I don't recommend select that but download by yourself) you could install LLVM manually. Find [LLVM release in GitHub](https://github.com/llvm/llvm-project/releases). Find Windows
 installer called `LLVM-<version>.win64.exe`. (like [`LLVM-17.0.1-win64.exe`](https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.1/LLVM-17.0.1-win64.exe))
 I assume you install it to `C:\Program Files\LLVM` so `clang` should be `C:\Program Files\LLVM\bin\clang.exe`.
 
@@ -82,9 +102,17 @@ Thread model: posix
 InstalledDir: C:\Program Files\LLVM\bin
 ```
 
-You're good to go.
+If you installed `clang` without Visual Studio stuff `clang` will complain it cannot find headers and libraries when compiling.
 
-Note: Of course there're other ways to get yourself a LLVM environment. As described in [Building Zig on Windows](https://github.com/ziglang/zig/wiki/Building-Zig-on-Windows).
+```powershell
+clang: warning: unable to find a Visual Studio installation; try running Clang from a developer command prompt [-Wmsvc-not-found]
+main.c:1:10: fatal error: 'stdio.h' file not found
+    1 | #include <stdio.h>
+      |          ^~~~~~~~~
+1 error generated.
+```
+
+You're good to go.
 
 #### MSYS2
 
@@ -183,7 +211,7 @@ PS > Dependencies -depth 1 -modules "C:\Program Files\LLVM\bin\clang.exe"
 [WindowsFolder] VERSION.dll : C:\WINDOWS\system32\VERSION.dll
 ```
 
-The obvious difference is `libstdc++-6.dll` and `MSVCP140.dll`. The latter is from MSVC. 
+The obvious difference is `libstdc++-6.dll` and `MSVCP140.dll`. The latter is from MSVC since `libc++` is not available in Windows (yet).
 
 #### [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) or [Docker](https://www.docker.com/)
 
@@ -199,6 +227,7 @@ Because the rest is the same as [Linux](#linux), I won't talk about it here.
 - [What's the difference between windows-gnu and windows-msvc release?](https://github.com/sharkdp/fd/issues/726)
 - [C/C++标准库](https://zhuanlan.zhihu.com/p/566419668)
 - [Understanding the different flavors of Clang C and C++ compilers in Windows](https://blog.conan.io/2022/10/13/Different-flavors-Clang-compiler-Windows.html)
+- [How run clang from command line on Windows?](https://stackoverflow.com/questions/18711595/how-run-clang-from-command-line-on-windows)
 
 ### Linux
 
