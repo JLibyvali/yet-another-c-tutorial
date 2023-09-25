@@ -421,7 +421,7 @@ TODO: A example of using a third-party library like [libcurl](https://curl.se/li
 
 #### [`nix`](https://nixos.org/)
 
-Nix is special since it could run on any distro without messing up your system packages. It's a package manager and a build system.
+Nix is special since it could run on any distro without messing up your system packages. A functional package manager per say.
 
 TODO: Package management made easy. Docker is also a good choice.
 
