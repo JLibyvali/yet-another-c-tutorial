@@ -275,7 +275,7 @@ sudo pacman -S base-devel
 
 ### macOS
 
-Xcode comes with llvm but you could install only Xcode Command Line Tools with following command.
+Xcode comes with llvm. If you haven't installed it you could install Xcode Command Line Tools with following command.
 
 ```bash
 xcode-select --install 
@@ -355,20 +355,20 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 You could manually link the C++ standard library though
 
 ```bash
-# -lc++ means link libc++
+# -lc++ means link `libc++` which is the C++ standard library for clang
 clang -o hello hello.cpp -lc++
-# gcc
+# gcc use `libstdc++` instead
 gcc -o hello hello.cpp -lstdc++
 ```
 
-What's `libc++` you may ask?
+What's `libc++` and `libstdc++` you may ask?
 
 ```bash
 # macOS
 $ otool -L hello 
 
 hello:
-        /usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 1500.65.0)
+        /usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 1500.65.0)        # <<= libc++
         /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1319.100.3)
 ```
 
@@ -377,7 +377,7 @@ hello:
 $ ldd hello
 
         linux-vdso.so.1 (0x0000007f9d58c000)
-        libstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000007f9d2f0000)
+        libstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000007f9d2f0000)    # <<= libstdc++
         libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000007f9d140000)
         libm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000007f9d0a0000)
         libgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000007f9d060000)
