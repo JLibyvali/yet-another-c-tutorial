@@ -1,6 +1,6 @@
 # How to write (or not write) a C/C++ Project
 
-## Preaqusiites
+## Prerequisites
 
 - A text editor (preferably vim, a plain [Notepad](https://en.wikipedia.org/wiki/Windows_Notepad) could also do its jobs)
 - Know what a shell is (cmd, bash, powershell, etc.)
