@@ -411,7 +411,7 @@ System libraries. [pkgs.org](https://pkgs.org/) to search for packages.
 - [apt](https://en.wikipedia.org/wiki/APT_(software)) based (Debian, Ubuntu) convention: `lib<name>-dev` for development files, `lib<name>` for runtime files. 
 - [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager) based (CentOS, Fedora) convention: `lib<name>-devel` for development files, `lib<name>` for runtime files. 
 - [pacman](https://wiki.archlinux.org/title/Pacman) based (archlinux, Manjaro) convention: `lib<name>` for both development and runtime files.
-- [Homebrew](https://brew.sh/) based convention: `lib<name>` for both development and runtime files.
+- [Homebrew](https://brew.sh/) based convention: `<name>` for both development and runtime files (and executable binary).
 
 TODO: A example of using a third-party library like [libcurl](https://curl.se/libcurl/).
 
